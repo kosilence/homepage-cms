@@ -3,17 +3,25 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var expressJwt = require('express-jwt');
+var config = require('./config');
+var logger = require('morgan');
+
 var index = require('./routes/index');
+var api = require('./routes/api');
+
+require('./models');
 
 var app = express();
-
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
 app.use(bodyParser.json({limit:1024102420, type:'application/json'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 ///=======路由 开始===========//
+app.use('/api', expressJwt({ secret: config.jwt_secret}).unless({path: ['/api/auth']}), api);
 app.use('/', index);
 ///=======路由 结束===========//
 
@@ -35,7 +43,5 @@ app.use(function(err, req, res, next) {
     // render the error pageserver
     res.status(err.status || 500).send(err.message);
 });
-
-app.listen(3001, () => console.log('App server listening on port 3001!'));
 
 module.exports = app;
