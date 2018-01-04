@@ -17,7 +17,7 @@ export default class LoginForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <Form.Item>
-          {getFieldDecorator('user')(
+          {getFieldDecorator('username')(
             <Input prefix={<Icon type="user" />} placeholder="Who are you ?" />
           )}
         </Form.Item>

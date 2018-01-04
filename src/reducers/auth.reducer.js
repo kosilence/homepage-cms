@@ -1,15 +1,10 @@
 import { types } from "../actions";
-import Auth from '../helpers/auth';
 
 const initialState = {
-  isLogin: false,
-  token: '',
-  user: ''
+  username: ''
 };
 
 function handleSubmitLoginForm(state, action) {
-  Auth.setToken(action.password);
-  window.location.href = '/';
 }
 
 export default (state = { ...initialState }, action) => {

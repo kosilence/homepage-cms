@@ -36,7 +36,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     onSubmit: (values) => {
-      dispatch(actions.submitLoginForm(values));
+      dispatch(actions.fetchAuthToken(values));
     }
   };
 };

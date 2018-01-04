@@ -4,18 +4,15 @@ import './index.css';
 import 'antd/dist/antd.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter as Router } from 'react-router-dom';
-import reducer from "./reducers";
-import { createStore } from "redux";
 import { Provider } from "react-redux";
-
-let store = createStore(reducer);
+import { ConnectedRouter } from 'react-router-redux';
+import { store, history } from './store';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <ConnectedRouter history={history}>
       <App />
-    </Router>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
 );

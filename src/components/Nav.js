@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import Auth from '../helpers/auth';
+import { history } from '../store';
 
 export default class Nav extends Component {
   state = {
@@ -13,8 +14,8 @@ export default class Nav extends Component {
       current: e.key,
     });
     if(e.key === 'logout') {
-      Auth.setToken('');
-      window.location.href = '/';
+      Auth.clearToken();
+      history.push('/login');
     }
   }
 
