@@ -22,3 +22,6 @@ yarn-error.log*
 
 # config
 config.js
+
+# scss to css files
+src/**/*.css

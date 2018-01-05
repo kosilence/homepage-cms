@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { actions } from "../actions";
 import LoginForm from '../components/LoginForm'
-import { Form, Button } from 'antd';
+import { Form, Icon } from 'antd';
+import './Login.css';
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -10,20 +11,34 @@ class LoginContainer extends Component {
     this.state = {
       isShowLoginForm: false
     };
-    this.toggleLoginForm = this.toggleLoginForm.bind(this);
+    this.showLoginForm = this.showLoginForm.bind(this);
+    this.hideLoginForm = this.hideLoginForm.bind(this);
   }
 
-  toggleLoginForm() {
-    this.setState({isShowLoginForm: !this.state.isShowLoginForm});
+  showLoginForm(e) {
+    e.stopPropagation();
+    if(!this.state.isShowLoginForm) {
+      this.setState({isShowLoginForm: true});
+    }
+  }
+  hideLoginForm(e) {
+    e.stopPropagation();
+    if(this.state.isShowLoginForm) {
+      this.setState({isShowLoginForm: false});
+    }
   }
 
   render() {
     const WrappedLoginForm = Form.create()(LoginForm);
     return (
-      <div>
-        <h1>Login Page</h1>
-        <Button onClick={this.toggleLoginForm}>{ this.state.isShowLoginForm ? 'Hide' : 'Show' }</Button>
-        { this.state.isShowLoginForm && <WrappedLoginForm onSubmit={this.props.onSubmit} /> }
+      <div className="login" onClick={this.showLoginForm}>
+        {
+          this.state.isShowLoginForm &&
+          <div className="login__form bounce">
+            <Icon type="close" className="login__close" onClick={this.hideLoginForm} />
+            <WrappedLoginForm onSubmit={this.props.onSubmit} />
+          </div>
+        }
       </div>
     );
   }
