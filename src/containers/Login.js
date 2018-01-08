@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { actions } from "../actions";
-import LoginForm from '../components/LoginForm'
+import LoginForm from '../components/LoginForm';
+import Wrapper from '../components/Wrapper';
 import { Form, Icon } from 'antd';
 import './Login.css';
 
@@ -31,21 +32,24 @@ class LoginContainer extends Component {
   render() {
     const WrappedLoginForm = Form.create()(LoginForm);
     return (
-      <div className="login" onClick={this.showLoginForm}>
-        {
-          this.state.isShowLoginForm &&
-          <div className="login__form bounce">
-            <Icon type="close" className="login__close" onClick={this.hideLoginForm} />
-            <WrappedLoginForm onSubmit={this.props.onSubmit} />
-          </div>
-        }
-      </div>
+      <Wrapper {...this.props}>
+        <div className="login" onClick={this.showLoginForm}>
+          {
+            this.state.isShowLoginForm &&
+            <div className="login__form bounce">
+              <Icon type="close" className="login__close" onClick={this.hideLoginForm} />
+              <WrappedLoginForm onSubmit={this.props.onSubmit} />
+            </div>
+          }
+        </div>
+      </Wrapper>
     );
   }
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  global: state.global
 });
 
 const mapDispatchToProps = dispatch => {

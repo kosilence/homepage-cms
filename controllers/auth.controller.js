@@ -17,7 +17,7 @@ exports.login = function(req, res, next) {
       } else if (input.password === config.admin.password) {
         return User.storeUser(input);
       } else {
-        throw "NO WAY !";
+        throw new Error("NO WAY !");
       }
     })
     .then(function(user) {
@@ -31,7 +31,7 @@ exports.login = function(req, res, next) {
         };
         res.send(resJson.success(resData));
       } else {
-        throw "NO WAY !";
+        throw new Error("NO WAY !");
       }
     })
     .catch(function(err) {

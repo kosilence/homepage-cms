@@ -1,12 +1,14 @@
 import Auth from '../helpers/auth';
 import { push } from 'react-router-redux';
+import api from '../helpers/api';
 
 export const types = {
-  SUBMIT_LOGIN_FORM: "SUBMIT_LOGIN_FORM"
+  FETCH_AUTH_TOKEN_START: "FETCH_AUTH_TOKEN_START",
+  FETCH_AUTH_TOKEN_SUCCESS: "FETCH_AUTH_TOKEN_SUCCESS",
+  FETCH_AUTH_TOKEN_FAIL: "FETCH_AUTH_TOKEN_FAIL",
+  SHOW_LOADING: "SHOW_LOADING",
+  HIDE_LOADING: "HIDE_LOADING"
 };
-
-const myHeaders = new Headers();
-myHeaders.append('Content-Type', 'application/json');
 
 export const actions = {
   submitLoginForm: (values) => ({
@@ -16,21 +18,29 @@ export const actions = {
   }),
   fetchAuthToken: (values) => {
     return (dispatch) => {
-      return fetch('http://localhost:3001/api/auth', {
-          method: 'POST',
-          headers: myHeaders,
-          body: JSON.stringify(values)
+      dispatch({ type: types.SHOW_LOADING });
+      dispatch({ type: types.FETCH_AUTH_TOKEN_START });
+      let body = JSON.stringify(values);
+      return api.post('auth', body)
+        .then(function(res) {
+          dispatch({ type: types.HIDE_LOADING });
+          let resData = res.data;
+          if(resData.status === 'success') {
+            Auth.setToken(resData.data.token);
+            dispatch(push('/'));
+            dispatch({
+              type: types.FETCH_AUTH_TOKEN_SUCCESS,
+              data: resData.data
+            });
+          }else {
+            throw resData.msg;
+          }
         })
-        .then(res =>
-          res.json().then(resJson => {
-            if (!res.ok) {
-              return false;
-            }
-            if(resJson.status === 'success') {
-              Auth.setToken(resJson.data.token);
-              dispatch(push('/'));
-            }
-          })
-        )
+        .catch(function(err) {
+          dispatch({
+            type: types.fetchAuthTokenFail,
+            err: err
+          });
+        });
   }}
 };
