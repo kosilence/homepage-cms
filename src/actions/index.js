@@ -21,7 +21,7 @@ export const actions = {
       dispatch({ type: types.SHOW_LOADING });
       dispatch({ type: types.FETCH_AUTH_TOKEN_START });
       let body = JSON.stringify(values);
-      return api.post('auth', body)
+      return api.post('/api/token', body)
         .then(function(res) {
           dispatch({ type: types.HIDE_LOADING });
           let resData = res.data;

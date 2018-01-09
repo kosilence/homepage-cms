@@ -8,6 +8,7 @@ var config = require('./config');
 var logger = require('morgan');
 
 var index = require('./routes/index');
+var auth = require('./routes/auth');
 var api = require('./routes/api');
 
 require('./models');
@@ -26,7 +27,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 ///=======路由 开始===========//
-app.use('/api', expressJwt({ secret: config.jwt_secret}).unless({path: ['/api/auth']}), api);
+app.use('/api', api);
+app.use('/auth', expressJwt({ secret: config.jwt_secret}), auth);
 app.use('/', index);
 ///=======路由 结束===========//
 

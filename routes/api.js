@@ -3,12 +3,12 @@ var router = express.Router();
 
 // Controllers
 var authController = require('../controllers/auth.controller');
-var userController = require('../controllers/user.controller');
+var blogController = require('../controllers/blog.controller');
 
 // Access Token 认证获取
-router.post('/auth', authController.login);
+router.post('/token', authController.login);
 
-// User controller
-router.get('/users/whoami', userController.whoami);
+// Blog
+router.get('/blog', blogController.getBlog);
 
 module.exports = router;
