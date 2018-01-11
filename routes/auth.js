@@ -8,6 +8,6 @@ var blogController = require('../controllers/blog.controller');
 // User
 router.get('/users/whoami', userController.whoami);
 // Blog
-router.put('/blog', blogController.refreshBlog);
+router.post('/blog', blogController.refreshBlog);
 
 module.exports = router;

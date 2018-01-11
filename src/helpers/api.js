@@ -1,9 +1,15 @@
 import axios from 'axios';
+import Auth from './auth';
 
-const api = axios.create({
+export const http = axios.create({
   baseURL: 'http://localhost:3001',
-  timeout: 1000,
-  headers: {'Content-Type': 'application/json'}
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + Auth.getToken()
+  }
 });
 
-export default api;
+export const api = {
+  token: '/api/token',
+  blog: '/api/blog'
+};

@@ -8,7 +8,6 @@ var config = require('./config');
 var logger = require('morgan');
 
 var index = require('./routes/index');
-var auth = require('./routes/auth');
 var api = require('./routes/api');
 
 require('./models');
@@ -19,7 +18,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, Authorization, X-Requested-With, Content-Type, Accept");
     next();
   });
 app.use(bodyParser.json({limit:1024102420, type:'application/json'}));
@@ -28,7 +27,6 @@ app.use(cookieParser());
 
 ///=======路由 开始===========//
 app.use('/api', api);
-app.use('/auth', expressJwt({ secret: config.jwt_secret}), auth);
 app.use('/', index);
 ///=======路由 结束===========//
 

@@ -55,7 +55,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     onSubmit: (values) => {
-      dispatch(actions.fetchAuthToken(values));
+      dispatch(actions.getAuthToken(values));
     }
   };
 };

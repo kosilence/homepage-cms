@@ -1,0 +1,22 @@
+.blog {
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 30px;
+  &__update {
+    margin-bottom: 30px;
+  }
+  table {
+    table-layout:fixed;
+  }
+  td {
+    overflow: hidden;
+  }
+  &__post {
+    height: 60px;
+    white-space: nowrap;
+  }
+  &__summary {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
