@@ -14,5 +14,7 @@ mongoose.connect(config.db, {
 // models
 require('./user.model');
 require('./blog.model');
+require('./image.model');
 exports.User = mongoose.model('User');
 exports.Blog = mongoose.model('Blog');
+exports.Image = mongoose.model('Image');
