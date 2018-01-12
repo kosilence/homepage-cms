@@ -2,8 +2,14 @@
   width: 90%;
   margin: 0 auto;
   padding-top: 30px;
-  &__update {
-    margin-bottom: 30px;
+  .update {
+    &__btn {
+      margin-bottom: 30px;
+    }
+    &__info {
+      float: right;
+      line-height: 32px;
+    }
   }
   table {
     table-layout:fixed;

@@ -9,11 +9,11 @@ import './Blog.css';
 const columns = [{
   title: 'Date',
   dataIndex: 'created',
-  width: '150px',
+  width: '130px',
 }, {
   title: 'Title',
   dataIndex: 'title',
-  width: '360px'
+  width: '350px'
 }, {
   title: 'Summary',
   dataIndex: 'summary',
@@ -38,8 +38,9 @@ class BlogContainer extends Component {
         <div className="blog">
           <Button
             type="primary"
-            className="blog__update"
+            className="update__btn"
             onClick={this.updateBlog}>Update</Button>
+          <span className="update__info">Last Update: {this.props.blog.updated_at}</span>
           <Table
             pagination={false}
             columns={columns}
