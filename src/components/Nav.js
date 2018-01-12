@@ -9,6 +9,29 @@ export default class Nav extends Component {
     current: 'home',
   }
 
+  componentDidMount() {
+    this.initPathSelected();
+  }
+
+  initPathSelected = () => {
+    let path = history.location.pathname;
+    let keyName = '';
+    switch(path) {
+      case '/':
+        keyName = 'home';
+        break;
+      case '/blog':
+        keyName = 'blog';
+        break;
+      default:
+        keyName = '';
+        break;
+    }
+    this.setState({
+      current: keyName
+    });
+  }
+
   handleClick = (e) => {
     this.setState({
       current: e.key,
