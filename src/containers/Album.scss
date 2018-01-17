@@ -1,0 +1,11 @@
+.album {
+  padding-top: 30px;
+  width: 90%;
+  margin: 0 auto;
+  &__cards {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}

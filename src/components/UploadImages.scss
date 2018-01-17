@@ -1,0 +1,14 @@
+.uploadImages {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  &__input {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+  &__btn {
+    width: 200px;
+    margin: 0 10px;
+  }
+}

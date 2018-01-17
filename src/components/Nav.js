@@ -23,6 +23,9 @@ export default class Nav extends Component {
       case '/blog':
         keyName = 'blog';
         break;
+      case '/album':
+        keyName = 'album';
+        break;
       default:
         keyName = '';
         break;
@@ -53,6 +56,9 @@ export default class Nav extends Component {
         </Menu.Item>
         <Menu.Item key="blog">
           <Link to="/blog">Blog</Link>
+        </Menu.Item>
+        <Menu.Item key="album">
+          <Link to="/album">Album</Link>
         </Menu.Item>
         <Menu.Item key="logout" style={{ float: 'right' }}>
           <Icon type="logout" />Logout
