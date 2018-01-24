@@ -1,7 +1,7 @@
 var Blog = require("../services").Blog;
 var resJson = require("../common/res_json.js");
 
-exports.getBlog = function(req, res, next) {
+exports.get = function(req, res, next) {
   Blog.getBlogLatest()
     .then(function(blog) {
       res.send(resJson.success(blog));
@@ -11,7 +11,7 @@ exports.getBlog = function(req, res, next) {
     });
 };
 
-exports.refreshBlog = function(req, res, next) {
+exports.refresh = function(req, res, next) {
   Blog.storeBlog()
     .then(function(blog) {
       res.send(resJson.success(blog));

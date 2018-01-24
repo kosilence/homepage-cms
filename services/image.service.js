@@ -8,7 +8,6 @@ exports.getAllImages = function() {
   return new Promise(function(resolve, reject) {
     Image.find()
       .sort({ updated_at: -1 })
-      .limit(30)
       .then(function(images) {
         resolve(images);
       })
@@ -16,18 +15,18 @@ exports.getAllImages = function() {
         reject(err);
       });
   });
-}
+};
 
 exports.storeImage = function(input) {
   return new Promise(function(resolve, reject) {
     var image = new Image({
       url: input.url,
       desc: input.desc,
-      type: input.type,
-      tags: input.tags
+      type: input.type
     });
 
-    image.save()
+    image
+      .save()
       .then(function(image) {
         resolve(image);
       })
@@ -35,13 +34,51 @@ exports.storeImage = function(input) {
         reject(err);
       });
   });
-}
+};
 
 exports.storeImages = function(images) {
   let imageSavePromises = [];
-  for(let i in images) {
+  for (let i in images) {
     imageSavePromises.push(this.storeImage(images[i]));
   }
 
   return Promise.all(imageSavePromises);
-}
+};
+
+exports.updateImage = function(input, id) {
+  return new Promise(function(resolve, reject) {
+    var imageData = {
+      url: input.url,
+      desc: input.desc,
+      type: input.type
+    };
+
+    Image.findByIdAndUpdate(id, { $set: imageData }, { new: true })
+      .then(function(image) {
+        if (image) {
+          resolve(image);
+        } else {
+          reject("Update Image Error.");
+        }
+      })
+      .catch(function(err) {
+        reject(err);
+      });
+  });
+};
+
+exports.deleteImage = function(id) {
+  return new Promise(function(resolve, reject) {
+    Image.findByIdAndRemove(id)
+      .then(function(image) {
+        if (image) {
+          resolve(image);
+        } else {
+          reject("Delete Image Error.");
+        }
+      })
+      .catch(function(err) {
+        reject(err);
+      });
+  });
+};
