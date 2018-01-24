@@ -5,7 +5,6 @@ import Wrapper from '../components/Wrapper';
 import UploadImages from '../components/UploadImages';
 import CardItem from '../components/CardItem';
 import { Divider } from 'antd';
-import { store } from '../store';
 import './Album.css';
 
 function Cards(images, onDeleteImage, onUpdateImage) {
@@ -23,9 +22,8 @@ function Cards(images, onDeleteImage, onUpdateImage) {
 
 class AlbumContainer extends Component {
   componentDidMount() {
-    let albumLength = store.getState().album.images.length;
-    if(!albumLength) {
-      store.dispatch(actions.getAlbum());
+    if(!this.props.album.images.length) {
+      this.props.onGetImages();
     }
   }
 
@@ -51,6 +49,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
+    onGetImages: () => {
+      dispatch(actions.getImages());
+    },
     onUpload: (images) => {
       dispatch(actions.addImages(images));
     },

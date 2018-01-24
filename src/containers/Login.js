@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { actions } from "../actions";
 import LoginForm from '../components/LoginForm';
 import Wrapper from '../components/Wrapper';
 import { Form, Icon } from 'antd';
+import { login } from '../helpers/login';
 import './Login.css';
 
 class LoginContainer extends Component {
@@ -48,14 +48,13 @@ class LoginContainer extends Component {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
   global: state.global
 });
 
 const mapDispatchToProps = dispatch => {
   return {
     onSubmit: (values) => {
-      dispatch(actions.getAuthToken(values));
+      login(values);
     }
   };
 };

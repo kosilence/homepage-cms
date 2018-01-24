@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { actions } from "../actions";
 import Wrapper from '../components/Wrapper';
 import { Table, Button } from 'antd';
-import { store } from '../store';
 import './Blog.css';
 
 const columns = [{
@@ -22,14 +21,9 @@ const columns = [{
 
 class BlogContainer extends Component {
   componentDidMount() {
-    let blogId = store.getState().blog._id;
-    if(!blogId) {
-      store.dispatch(actions.getBlog());
+    if(!this.props.blog._id) {
+      this.props.onGetBlog();
     }
-  }
-
-  updateBlog = () => {
-    store.dispatch(actions.updateBlog());
   }
 
   render() {
@@ -39,7 +33,7 @@ class BlogContainer extends Component {
           <Button
             type="primary"
             className="update__btn"
-            onClick={this.updateBlog}>Update</Button>
+            onClick={this.props.onUpdateBlog}>Update</Button>
           <span className="update__info">Last Update: {this.props.blog.updated_at}</span>
           <Table
             pagination={false}
@@ -59,6 +53,17 @@ const mapStateToProps = state => ({
   global: state.global
 });
 
-const Blog = connect(mapStateToProps)(BlogContainer);
+const mapDispatchToProps = dispatch => {
+  return {
+    onGetBlog: () => {
+      dispatch(actions.getBlog());
+    },
+    onUpdateBlog: () => {
+      dispatch(actions.updateBlog());
+    }
+  };
+};
+
+const Blog = connect(mapStateToProps, mapDispatchToProps)(BlogContainer);
 
 export default Blog;

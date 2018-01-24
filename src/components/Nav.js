@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
-import Auth from '../helpers/auth';
+import { logout } from '../helpers/login';
 import { history } from '../store';
 
 export default class Nav extends Component {
@@ -40,8 +40,7 @@ export default class Nav extends Component {
       current: e.key,
     });
     if(e.key === 'logout') {
-      Auth.clearToken();
-      history.push('/login');
+      logout();
     }
   }
 
