@@ -55,11 +55,11 @@ const mapDispatchToProps = dispatch => {
     onUpload: (images) => {
       dispatch(actions.addImages(images));
     },
-    onDeleteImage: (id) => {
-      dispatch(actions.deleteImage(id));
-    },
     onUpdateImage: (image) => {
       dispatch(actions.updateImage(image));
+    },
+    onDeleteImage: (id) => {
+      dispatch(actions.deleteImage(id));
     }
   };
 };
