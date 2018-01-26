@@ -50,7 +50,7 @@ export default class UploadImages extends Component {
       <div className="uploadImages">
         <TextArea
           className="uploadImages__input"
-          placeholder="Input your new images links & describes"
+          placeholder="Input your new images like: LINK, DESC"
           autosize
           value={this.state.inputs}
           onChange={this.handleTextChange}

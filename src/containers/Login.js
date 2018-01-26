@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import LoginForm from '../components/LoginForm';
-import Wrapper from '../components/Wrapper';
 import { Form, Icon } from 'antd';
 import { login } from '../helpers/login';
 import './Login.css';
@@ -32,17 +31,15 @@ class LoginContainer extends Component {
   render() {
     const WrappedLoginForm = Form.create()(LoginForm);
     return (
-      <Wrapper {...this.props}>
-        <div className="login" onClick={this.showLoginForm}>
-          {
-            this.state.isShowLoginForm &&
-            <div className="login__form bounce">
-              <Icon type="close" className="login__close" onClick={this.hideLoginForm} />
-              <WrappedLoginForm onSubmit={this.props.onSubmit} />
-            </div>
-          }
-        </div>
-      </Wrapper>
+      <div className="login" onClick={this.showLoginForm}>
+        {
+          this.state.isShowLoginForm &&
+          <div className="login__form bounce">
+            <Icon type="close" className="login__close" onClick={this.hideLoginForm} />
+            <WrappedLoginForm onSubmit={this.props.onSubmit} />
+          </div>
+        }
+      </div>
     );
   }
 };

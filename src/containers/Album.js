@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { actions } from "../actions";
-import Wrapper from '../components/Wrapper';
 import UploadImages from '../components/UploadImages';
 import CardItem from '../components/CardItem';
 import { Divider } from 'antd';
@@ -29,15 +28,13 @@ class AlbumContainer extends Component {
 
   render() {
     return (
-      <Wrapper {...this.props}>
-        <div className="album">
-          <UploadImages onUpload={this.props.onUpload} />
-          <Divider />
-          <div className="album__cards">
-            { Cards(this.props.album.images, this.props.onDeleteImage, this.props.onUpdateImage) }
-          </div>
+      <div className="album">
+        <UploadImages onUpload={this.props.onUpload} />
+        <Divider />
+        <div className="album__cards">
+          { Cards(this.props.album.images, this.props.onDeleteImage, this.props.onUpdateImage) }
         </div>
-      </Wrapper>
+      </div>
     );
   }
 };

@@ -2,46 +2,29 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import { logout } from '../helpers/login';
-import { history } from '../store';
 
 export default class Nav extends Component {
-  state = {
-    current: 'home',
-  }
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
-    this.initPathSelected();
-  }
-
-  initPathSelected = () => {
-    let path = history.location.pathname;
-    let keyName = '';
-    switch(path) {
-      case '/':
-        keyName = 'home';
-        break;
-      case '/blog':
-        keyName = 'blog';
-        break;
-      case '/album':
-        keyName = 'album';
-        break;
-      default:
-        keyName = '';
-        break;
+    this.state = {
+      current: this.props.location.pathname
     }
-    this.setState({
-      current: keyName
-    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { location } = nextProps;
+    this.setState({ current: location.pathname });
   }
 
   handleClick = (e) => {
+    if(e.key === 'logout') {
+      logout();
+      return;
+    }
     this.setState({
       current: e.key,
     });
-    if(e.key === 'logout') {
-      logout();
-    }
   }
 
   render() {
@@ -50,13 +33,13 @@ export default class Nav extends Component {
         onClick={this.handleClick}
         selectedKeys={[this.state.current]}
         mode="horizontal">
-        <Menu.Item key="home">
+        <Menu.Item key="/">
           <Link to="/">Home</Link>
         </Menu.Item>
-        <Menu.Item key="blog">
+        <Menu.Item key="/blog">
           <Link to="/blog">Blog</Link>
         </Menu.Item>
-        <Menu.Item key="album">
+        <Menu.Item key="/album">
           <Link to="/album">Album</Link>
         </Menu.Item>
         <Menu.Item key="logout" style={{ float: 'right' }}>
