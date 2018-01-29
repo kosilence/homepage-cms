@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Card, Icon, Input } from 'antd';
+import { Card, Icon, Input, Modal } from 'antd';
 import './CardItem.css';
 
+const confirm = Modal.confirm;
 const { Meta } = Card;
 
 export default class CardItem extends Component {
@@ -11,7 +12,14 @@ export default class CardItem extends Component {
   }
 
   handleDeleteImage(id) {
-    this.props.onDeleteImage(id);
+    const that =  this;
+    confirm({
+      title: 'Do you want to delete this image?',
+      onOk() {
+        that.props.onDeleteImage(id);
+      },
+      onCancel() {},
+    });
   }
 
   handleUpdateImage = () => {

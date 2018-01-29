@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { actions } from "../actions";
-import { Table, Button } from 'antd';
+import { Table, Button, Modal } from 'antd';
 import './Blog.css';
+
+const confirm = Modal.confirm;
 
 const columns = [{
   title: 'Date',
@@ -25,18 +27,31 @@ class BlogContainer extends Component {
     }
   }
 
+  handleUpdateClick = () => {
+    const that =  this;
+    confirm({
+      title: 'Do you want to update blog posts?',
+      onOk() {
+        that.props.onUpdateBlog();
+      },
+      onCancel() {},
+    });
+  }
+
   render() {
+    const { blog } = this.props;
+
     return (
       <div className="blog">
         <Button
           type="primary"
           className="update__btn"
-          onClick={this.props.onUpdateBlog}>Update</Button>
-        <span className="update__info">Last Update: {this.props.blog.updated_at}</span>
+          onClick={this.handleUpdateClick}>Update</Button>
+        <span className="update__info">Last updated at: {blog.updated_at}</span>
         <Table
           pagination={false}
           columns={columns}
-          dataSource={this.props.blog.posts}
+          dataSource={blog.posts}
           rowClassName="blog__post"
           rowKey="_id"
         />

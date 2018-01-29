@@ -9,8 +9,7 @@ const loading = store => next => action => {
     store.dispatch(actions.showLoading());
   }
 
-  let typeSuffix = action.type.split('_').pop();
-  if(typeSuffix === 'SUCCESS' || typeSuffix === 'FAIL') {
+  if(action.type.match(/_(SUCCESS|FAIL)$/)) {
     store.dispatch(actions.hideLoading());
   }
 

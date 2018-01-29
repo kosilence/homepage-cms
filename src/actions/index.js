@@ -39,16 +39,6 @@ export const actions = {
     return {
       type: types.BLOG_GET,
       loading: true,
-      alert: {
-        success: {
-          display: true,
-          msg: 'Get blog success.',
-        },
-        fail: {
-          display: true,
-          msg: 'Something was wrong with blog',
-        }
-      },
       payload: {
         request:{
           url: api.blog
@@ -60,6 +50,16 @@ export const actions = {
     return {
       type: types.BLOG_UPDATE,
       loading: true,
+      alert: {
+        success: {
+          display: true,
+          msg: 'Update Blog Successfully.',
+        },
+        fail: {
+          display: true,
+          msg: 'Something Was Wrong When Updating Blog.',
+        }
+      },
       payload: {
         request:{
           method: 'post',
@@ -83,6 +83,16 @@ export const actions = {
     return {
       type: types.IMAGES_ADD,
       loading: true,
+      alert: {
+        success: {
+          display: true,
+          msg: 'Add Images Successfully.',
+        },
+        fail: {
+          display: true,
+          msg: 'Something Was Wrong When Adding Images.',
+        }
+      },
       payload: {
         request:{
           method: 'post',
@@ -96,6 +106,16 @@ export const actions = {
     return {
       type: types.IMAGE_UPDATE,
       loading: true,
+      alert: {
+        success: {
+          display: true,
+          msg: 'Update Images Successfully.',
+        },
+        fail: {
+          display: true,
+          msg: 'Something Was Wrong When Updating Image.',
+        }
+      },
       payload: {
         request:{
           method: 'put',
@@ -109,6 +129,16 @@ export const actions = {
     return {
       type: types.IMAGE_DELETE,
       loading: true,
+      alert: {
+        success: {
+          display: true,
+          msg: 'Delete Images Successfully.',
+        },
+        fail: {
+          display: true,
+          msg: 'Something Was Wrong When Deleting Image.',
+        }
+      },
       payload: {
         request:{
           method: 'delete',
