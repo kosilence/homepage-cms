@@ -1,22 +1,20 @@
 var models = require("../models");
 var User = models.User;
 var Promise = require("bluebird");
-var bcrypt = require("bcrypt");
 var config = require("../config");
+var CryptoJS = require("crypto-js");
 
 /**
  * 管理员注册/添加管理员
  */
 exports.storeUser = function(input) {
   return new Promise(function(resolve, reject) {
-    bcrypt.hash(input.password, config.bcrypt.saltRounds)
-      .then(function(hashedPassword) {
-        var user = new User({
-          username: input.username,
-          password: hashedPassword
-        });
-        return user.save();
-      })
+    var hashedPassword = CryptoJS.SHA256(input.password);
+    var user = new User({
+      username: input.username,
+      password: hashedPassword
+    });
+    user.save()
       .then(function(user) {
         if (user) {
           resolve(user);

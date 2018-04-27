@@ -2,7 +2,7 @@ var User = require("../services").User;
 var jwt = require("../common/jwt.js");
 var resJson = require("../common/res_json.js");
 var config = require("../config");
-var bcrypt = require("bcrypt");
+var CryptoJS = require("crypto-js");
 
 exports.login = function(req, res, next) {
   var input = {
@@ -22,7 +22,8 @@ exports.login = function(req, res, next) {
     })
     .then(function(user) {
       userData = user;
-      return bcrypt.compare(input.password, user.password);
+      var inputPassword = CryptoJS.SHA256(input.password);
+      return inputPassword == user.password;
     })
     .then(function(result) {
       if (result === true) {
