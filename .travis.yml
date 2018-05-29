@@ -1,0 +1,25 @@
+# .travis.yml
+language: node_js   #前端工程所以是JavaScript，编译环境是node_js
+node_js:
+- '8'   #指定node版本
+sudo: false
+cache:
+  apt: true
+  directories:
+    - node_modules
+branchs:
+  only:
+  - master  #指定只有检测到master分支有变动时才执行任务
+install:
+- cd /var
+- echo uname -a
+addons:
+  ssh_known_hosts: cosin.tk
+before_install:
+- openssl aes-256-cbc -K $encrypted_xxx_key -iv $encrypted_xxx_iv -in ./id_rsa.enc -out ~/.ssh/id_rsa -d
+# Set the permission of the key
+- chmod 600 ~/.ssh/id_rsa
+# Start SSH agent
+- eval $(ssh-agent)
+# Add the private key to the system
+- ssh-add ~/.ssh/id_rsa
